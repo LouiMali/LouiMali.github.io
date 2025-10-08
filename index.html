@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Louis Malinowski – IT-Praktikum ab August 2026</title>
+  <meta name="description" content="Persönliche Bewerbungs-Website von Louis Malinowski für ein IT-Praktikum ab August 2026. Moderne, barrierearme, schnelle Single-Page-Website.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- Für Project Pages keine absolute Canonical setzen -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="Louis Malinowski – IT-Praktikum ab August 2026">
+  <meta property="og:description" content="Bewerbung für ein IT-Praktikum (Start August 2026). Projekte, Kenntnisse, Lebenslauf und Kontakt.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/avatar.jpg">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Louis Malinowski – IT-Praktikum ab August 2026">
+  <meta name="twitter:description" content="Bewerbung für ein IT-Praktikum ab August 2026.">
+  <meta name="twitter:image" content="assets/avatar.jpg">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#start">Zum Inhalt springen</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header__inner">
+      <a class="brand" href="#start" aria-label="Zur Startseite">
+        <img class="brand__logo" src="assets/favicon.svg" alt="" width="28" height="28" decoding="async">
+        <span class="brand__name">Louis&nbsp;Malinowski</span>
+      </a>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-controls="site-nav" aria-expanded="false">
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
+        <ul class="nav__list">
+          <li><a href="#start" class="nav__link">Start</a></li>
+          <li><a href="#ueber-mich" class="nav__link">Ueber mich</a></li>
+          <li><a href="#projekte" class="nav__link">Kenntnisse &amp; Projekte</a></li>
+          <li><a href="#lebenslauf" class="nav__link">Lebenslauf</a></li>
+          <li><a href="#kontakt" class="nav__link">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="start" class="hero" tabindex="-1">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <h1 class="hero__title">Hoi, ich bin Louis&nbsp;Malinowski.</h1>
+        <p class="hero__subtitle">Ich suche ein <strong>IT-Praktikum ab August 2026</strong> – mit Fokus auf Programmierung, Webentwicklung und Datenbanken.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#kontakt" data-scroll>Praktikumsplatz anbieten</a>
+          <a class="btn btn--ghost" href="https://github.com/LouiMali?tab=repositories" target="_blank" rel="noopener">GitHub ansehen</a>
+        </div>
+      </div>
+      <picture class="hero__media">
+        <img src="assets/avatar.jpg" alt="Porträt: Louis Malinowski" width="320" height="320" loading="lazy" decoding="async">
+      </picture>
+    </div>
+  </main>
+
+  <section id="ueber-mich" class="section section--surface" aria-label="Ueber mich">
+    <div class="container">
+      <h2>Ueber mich</h2>
+      <div class="about">
+        <dl class="about__grid">
+          <div><dt>Alter</dt><dd>32</dd></div>
+          <div><dt>Wohnort</dt><dd>Zuerich</dd></div>
+          <div><dt>Schulbildung</dt><dd>Erwachsenenbildung Applikationsentwicklung EFZ (WISS) – <em>Platzhalter, editierbar</em></dd></div>
+        </dl>
+        <div class="about__cols">
+          <div>
+            <h3>Interessen</h3>
+            <ul class="list"><li>Programmierung</li><li>Webentwicklung</li><li>Datenbanken</li></ul>
+          </div>
+          <div>
+            <h3>Soft Skills</h3>
+            <ul class="list"><li>Teamfaehigkeit</li><li>Lernbereitschaft</li><li>Analytisches Denken</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projekte" class="section" aria-label="Kenntnisse und Projekte">
+    <div class="container">
+      <h2>Kenntnisse &amp; Projekte</h2>
+      <div class="skills">
+        <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Python</span>
+        <span class="badge">Java</span><span class="badge">Linux-Grundlagen</span><span class="badge">git</span><span class="badge">GitHub</span>
+      </div>
+
+      <p class="repo__intro">Meine oeffentlichen Repositories (automatisch geladen, Forks ausgeblendet):</p>
+      <div id="repos" class="repo-grid" role="list" aria-live="polite" aria-busy="true">
+        <div class="card" aria-hidden="true"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div></div>
+        <div class="card" aria-hidden="true"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div></div>
+        <div class="card" aria-hidden="true"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div></div>
+      </div>
+      <p class="repo__fallback" id="repo-fallback" hidden>
+        Repositories konnten nicht geladen werden. Bitte spaeter erneut versuchen.
+        Profil auf GitHub: <a href="https://github.com/LouiMali?tab=repositories" target="_blank" rel="noopener">github.com/LouiMali</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="lebenslauf" class="section section--surface" aria-label="Lebenslauf">
+    <div class="container">
+      <h2>Lebenslauf</h2>
+      <p>Mein aktueller Lebenslauf steht als PDF zum Download bereit.</p>
+      <a class="btn btn--primary" href="assets/cv.pdf" download>Lebenslauf als PDF herunterladen</a>
+    </div>
+  </section>
+
+  <section id="kontakt" class="section" aria-label="Kontaktformular">
+    <div class="container">
+      <h2>Kontakt</h2>
+
+      <!-- Netlify Forms (optional, auskommentiert)
+      <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="kontakt">
+      </form>
+      -->
+
+      <form id="contact-form" novalidate aria-describedby="form-status">
+        <div class="form__row">
+          <label for="name">Name*</label>
+          <input id="name" name="name" type="text" minlength="2" required autocomplete="name" placeholder="Ihr Name">
+          <div class="input-error" id="error-name" role="alert" aria-live="polite"></div>
+        </div>
+        <div class="form__row">
+          <label for="email">E-Mail*</label>
+          <input id="email" name="email" type="email" inputmode="email" required autocomplete="email" placeholder="ihre@email.ch">
+          <div class="input-error" id="error-email" role="alert" aria-live="polite"></div>
+        </div>
+        <div class="form__row">
+          <label for="message">Nachricht*</label>
+          <textarea id="message" name="message" minlength="10" required rows="6" placeholder="Ihre Nachricht an mich..."></textarea>
+          <div class="input-error" id="error-message" role="alert" aria-live="polite"></div>
+        </div>
+        <div class="form__actions"><button class="btn btn--primary" type="submit">Nachricht senden</button></div>
+        <p id="form-status" class="form__status" aria-live="polite"></p>
+        <p class="privacy-hint"><strong>Datenschutzhinweis:</strong> Das Formular erzeugt eine <code>mailto:</code>-Nachricht in Ihrem E-Mail-Programm.
+          Ihre Angaben werden <em>nicht</em> auf dem Server gespeichert und nur zur Bearbeitung Ihrer Anfrage verwendet.</p>
+      </form>
+    </div>
+  </section>
+
+  <section id="datenschutz" class="section section--compact" aria-label="Datenschutzerklaerung">
+    <div class="container">
+      <h2>Datenschutzerklaerung (Kurzfassung)</h2>
+      <p>Diese Website setzt keine Cookies, keine Tracker und keine externen Skripte ausser Google Fonts ein.
+      Personenbezogene Daten werden nur verarbeitet, wenn Sie eine E-Mail an mich senden. Rechtsgrundlage: berechtigtes Interesse (Kontaktaufnahme).</p>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer__inner">
+      <p>&copy; <span id="year"></span> Louis Malinowski. Kurz-Impressum &amp; Datenschutz:
+        <a href="#datenschutz">Zur Datenschutzerklaerung</a>.
+      </p>
+    </div>
+  </footer>
+
+  <noscript><div class="noscript">Diese Website funktioniert am besten mit aktiviertem JavaScript (Repo-Liste &amp; Formular-Validierung).</div></noscript>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
