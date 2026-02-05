@@ -40,7 +40,7 @@ input:focus-visible,textarea:focus-visible{outline:none;box-shadow:var(--focus);
 @media (max-width:768px){
 .hero{padding:3rem 0}
 .hero__inner{grid-template-columns:1fr}
-.hero__media{order:-1}.hero__media img{max-width:200px;width:100%;height:auto;margin-inline:auto}
+.hero__media{order:-1;display:flex;justify-content:center}.hero__media img{max-width:200px;width:100%;height:auto}
 .section{padding:2.5rem 0}
 .repo-grid{grid-template-columns:1fr}
 .nav__toggle{display:block}
