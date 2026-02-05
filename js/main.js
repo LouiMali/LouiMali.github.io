@@ -34,15 +34,15 @@
   const sections = $$("#start, #ueber-mich, #projekte, #lebenslauf, #kontakt");
   const navLinks = $$(".nav__link");
   const byId = id => navLinks.find(a => a.getAttribute('href') === `#${id}`);
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(ent => {
-      if (ent.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove("is-active"));
-        const l = byId(ent.target.id); if (l) l.classList.add("is-active");
-      }
-    });
-  }, { rootMargin: "-40% 0px -50% 0px", threshold: .1 });
-  sections.forEach(s => io.observe(s));
+  function updateActiveLink(){
+    let current = sections[0];
+    const trigger = window.scrollY + window.innerHeight * 0.35;
+    sections.forEach(s => { if (s.offsetTop <= trigger) current = s; });
+    navLinks.forEach(a => a.classList.remove("is-active"));
+    const l = byId(current.id); if (l) l.classList.add("is-active");
+  }
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
 
   /* GitHub-Repos laden (Forks ausblenden) */
   const reposEl = $("#repos");
