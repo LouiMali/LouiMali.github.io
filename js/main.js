@@ -23,26 +23,32 @@
   /* Mobile-Menü */
   const nav = $("#site-nav");
   const toggle = $(".nav__toggle");
-  const overlay = $("#nav-overlay");
-  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); overlay.classList.add("is-visible"); document.body.classList.add("menu-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
-  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); overlay.classList.remove("is-visible"); document.body.classList.remove("menu-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
+  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
+  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
   toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded")==="true"? closeMenu():openMenu()));
-  overlay.addEventListener("click", closeMenu);
+  document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded")==="true" && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
   /* Active-Link beim Scrollen */
   const sections = $$("#start, #ueber-mich, #projekte, #lebenslauf, #kontakt");
   const navLinks = $$(".nav__link");
   const byId = id => navLinks.find(a => a.getAttribute('href') === `#${id}`);
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(ent => {
-      if (ent.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove("is-active"));
-        const l = byId(ent.target.id); if (l) l.classList.add("is-active");
+  function updateActiveLink(){
+    let current = sections[0];
+    const atBottom = (window.innerHeight + Math.ceil(window.scrollY)) >= document.documentElement.scrollHeight - 2;
+    if (atBottom) {
+      current = sections[sections.length - 1];
+    } else {
+      const cutoff = window.innerHeight * 0.4;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].getBoundingClientRect().top <= cutoff) { current = sections[i]; break; }
       }
-    });
-  }, { rootMargin: "-40% 0px -50% 0px", threshold: .1 });
-  sections.forEach(s => io.observe(s));
+    }
+    navLinks.forEach(a => a.classList.remove("is-active"));
+    const l = byId(current.id); if (l) l.classList.add("is-active");
+  }
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
 
   /* GitHub-Repos laden (Forks ausblenden) */
   const reposEl = $("#repos");
