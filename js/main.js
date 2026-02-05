@@ -23,9 +23,11 @@
   /* Mobile-Menü */
   const nav = $("#site-nav");
   const toggle = $(".nav__toggle");
-  function openMenu(){ nav.classList.add("is-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
-  function closeMenu(){ nav.classList.remove("is-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
+  const overlay = $("#nav-overlay");
+  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); overlay.classList.add("is-visible"); document.body.classList.add("menu-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
+  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); overlay.classList.remove("is-visible"); document.body.classList.remove("menu-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
   toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded")==="true"? closeMenu():openMenu()));
+  overlay.addEventListener("click", closeMenu);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
   /* Active-Link beim Scrollen */
