@@ -36,8 +36,13 @@
   const byId = id => navLinks.find(a => a.getAttribute('href') === `#${id}`);
   function updateActiveLink(){
     let current = sections[0];
-    const trigger = window.scrollY + window.innerHeight * 0.35;
-    sections.forEach(s => { if (s.offsetTop <= trigger) current = s; });
+    const atBottom = (window.innerHeight + Math.ceil(window.scrollY)) >= document.documentElement.scrollHeight - 2;
+    if (atBottom) {
+      current = sections[sections.length - 1];
+    } else {
+      const trigger = window.scrollY + window.innerHeight * 0.35;
+      sections.forEach(s => { if (s.offsetTop <= trigger) current = s; });
+    }
     navLinks.forEach(a => a.classList.remove("is-active"));
     const l = byId(current.id); if (l) l.classList.add("is-active");
   }
