@@ -40,11 +40,10 @@ input:focus-visible,textarea:focus-visible{outline:none;box-shadow:var(--focus);
 @media (max-width:768px){
 .hero{padding:3rem 0}
 .hero__inner{grid-template-columns:1fr}
-.hero__media{order:-1;text-align:center}.hero__media img{max-width:200px;width:100%;height:auto}
+.hero__media{order:-1}.hero__media img{max-width:200px;width:100%;height:auto;margin-inline:auto}
 .section{padding:2.5rem 0}
 .repo-grid{grid-template-columns:1fr}
 .nav__toggle{display:block}
-.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;pointer-events:none}.nav-overlay.is-visible{display:block;pointer-events:none}
 .nav{position:absolute;top:100%;right:0;width:min(92vw,400px);background:var(--surface);border:1px solid rgba(122,162,255,.2);border-radius:14px;padding:.5rem;margin:.5rem;transform:translateY(-10px);opacity:0;visibility:hidden;transition:opacity .15s ease,transform .15s ease;z-index:999}.nav.is-open{opacity:1;visibility:visible;transform:translateY(0)}.nav__list{flex-direction:column}
 .nav__link{padding:.75rem 1rem;min-height:44px;display:flex;align-items:center;border-radius:10px}
 .nav__link.is-active{background:rgba(47,111,255,.25);color:#fff;border-left:3px solid var(--primary);font-weight:600}}

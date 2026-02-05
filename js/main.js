@@ -23,9 +23,8 @@
   /* Mobile-Menü */
   const nav = $("#site-nav");
   const toggle = $(".nav__toggle");
-  const overlay = $("#nav-overlay");
-  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); overlay.classList.add("is-visible"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
-  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); overlay.classList.remove("is-visible"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
+  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
+  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
   toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded")==="true"? closeMenu():openMenu()));
   document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded")==="true" && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
