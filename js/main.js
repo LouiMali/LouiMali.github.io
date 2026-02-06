@@ -47,7 +47,10 @@
     navLinks.forEach(a => a.classList.remove("is-active"));
     const l = byId(current.id); if (l) l.classList.add("is-active");
   }
-  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  let scrollTicking = false;
+  window.addEventListener("scroll", () => {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(() => { updateActiveLink(); scrollTicking = false; }); }
+  }, { passive: true });
   updateActiveLink();
 
   /* GitHub-Repos laden (Forks ausblenden) */
@@ -70,9 +73,10 @@
       reposEl.innerHTML = "";
       reposEl.removeAttribute("aria-busy");
 
-      repos.forEach(r => {
+      repos.forEach((r, i) => {
         const card = document.createElement("article");
-        card.className = "card";
+        card.className = "card card--loaded";
+        card.style.animationDelay = `${i * 0.05}s`;
         card.setAttribute("role","listitem");
         card.innerHTML = `
           <h3 class="card__title"><a href="${r.html_url}" target="_blank" rel="noopener">${escapeHTML(r.name)}</a></h3>
