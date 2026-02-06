@@ -11,6 +11,8 @@
   /* --- State --- */
   let skills = [];
   let categories = [];
+  let demoMode = false;
+  let nextDemoId = 100;
   let filterCategory = "all";
   let filterPriority = "all";
 
@@ -55,12 +57,13 @@
     try {
       const data = await fetchJSON(`${API_URL}/skills`);
       skills = Array.isArray(data) ? data : [];
+      demoMode = false;
       extractCategories();
       updateStats();
       renderSkills();
     } catch (err) {
-      showError();
-      console.warn("SkillTracker API Fehler:", err.message);
+      console.warn("SkillTracker API nicht erreichbar:", err.message);
+      activateDemoMode();
     }
   }
 
@@ -69,6 +72,61 @@
       method: "POST",
       body: JSON.stringify(payload),
     });
+  }
+
+  /* --- Demo Mode --- */
+  function activateDemoMode() {
+    demoMode = true;
+    skills = [
+      { id: 1, name: "JavaScript", category_id_fk: 1, category_name: "Programmierung", current_level: 3, target_level: 5, priority: "High", notes: "Fokus auf ES6+ und async/await", created_at: "2025-12-19T10:00:00Z" },
+      { id: 2, name: "Python", category_id_fk: 1, category_name: "Programmierung", current_level: 2, target_level: 4, priority: "Medium", notes: "Grundlagen und OOP", created_at: "2025-12-19T10:00:00Z" },
+      { id: 3, name: "Java", category_id_fk: 1, category_name: "Programmierung", current_level: 2, target_level: 4, priority: "Medium", notes: null, created_at: "2025-12-20T09:00:00Z" },
+      { id: 4, name: "HTML & CSS", category_id_fk: 2, category_name: "Webentwicklung", current_level: 4, target_level: 5, priority: "High", notes: "Responsive Design und Accessibility", created_at: "2025-12-19T10:00:00Z" },
+      { id: 5, name: "React", category_id_fk: 2, category_name: "Webentwicklung", current_level: 1, target_level: 4, priority: "Medium", notes: "Nächstes Lernziel", created_at: "2025-12-21T14:00:00Z" },
+      { id: 6, name: "MySQL", category_id_fk: 3, category_name: "Datenbanken", current_level: 2, target_level: 4, priority: "High", notes: "Joins, Subqueries, Indexing", created_at: "2025-12-19T10:00:00Z" },
+      { id: 7, name: "Linux Grundlagen", category_id_fk: 4, category_name: "DevOps", current_level: 3, target_level: 3, priority: "Low", notes: null, created_at: "2025-12-20T11:00:00Z" },
+      { id: 8, name: "Git & GitHub", category_id_fk: 4, category_name: "DevOps", current_level: 3, target_level: 4, priority: "Medium", notes: "Branching und Pull Requests", created_at: "2025-12-19T10:00:00Z" },
+    ];
+    extractCategories();
+    updateStats();
+    renderSkills();
+    showDemoBanner();
+  }
+
+  function addSkillLocally(payload) {
+    const catName = categories.find((c) => c.id === payload.category_id_fk);
+    skills.push({
+      id: nextDemoId++,
+      name: payload.name,
+      category_id_fk: payload.category_id_fk,
+      category_name: catName ? catName.name : "Unkategorisiert",
+      current_level: payload.current_level,
+      target_level: payload.target_level,
+      priority: payload.priority || "Medium",
+      notes: payload.notes || null,
+      created_at: new Date().toISOString(),
+    });
+    extractCategories();
+    updateStats();
+    renderSkills();
+  }
+
+  function showDemoBanner() {
+    let banner = $("#demo-banner");
+    if (!banner) {
+      banner = document.createElement("div");
+      banner.id = "demo-banner";
+      banner.className = "demo-banner";
+      banner.setAttribute("role", "status");
+      banner.innerHTML =
+        '<span>Demo-Modus – Backend nicht verbunden</span>' +
+        '<button class="demo-banner__close" aria-label="Schliessen">&times;</button>';
+      const main = $("#app-main");
+      if (main) main.prepend(banner);
+      banner.querySelector(".demo-banner__close").addEventListener("click", () => {
+        banner.remove();
+      });
+    }
   }
 
   /* --- Categories --- */
@@ -311,7 +369,6 @@
   });
 
   function resetPickers() {
-    /* Reset level pickers */
     const pickerCurrent = $("#picker-current");
     const pickerTarget = $("#picker-target");
     if (pickerCurrent) updateLevelDots(pickerCurrent, 1);
@@ -319,7 +376,6 @@
     $("#skill-current").value = "1";
     $("#skill-target").value = "5";
 
-    /* Reset priority */
     $$(".priority-btn").forEach((b) => b.classList.remove("is-active"));
     const medBtn = $(".priority-btn[data-priority='Medium']");
     if (medBtn) medBtn.classList.add("is-active");
@@ -361,6 +417,21 @@
     if (notes) payload.notes = notes;
 
     formStatus.textContent = "Wird gespeichert...";
+
+    if (demoMode) {
+      /* In demo mode, add skill locally */
+      const duplicate = skills.some(
+        (s) => s.name.toLowerCase() === name.toLowerCase()
+      );
+      if (duplicate) {
+        formStatus.textContent = "Dieser Skill existiert bereits.";
+        return;
+      }
+      addSkillLocally(payload);
+      formStatus.textContent = "Skill gespeichert! (Demo)";
+      setTimeout(closeModal, 600);
+      return;
+    }
 
     try {
       await createSkill(payload);
@@ -406,37 +477,6 @@
     }
   }
 
-  /* --- Demo Data (used when API is unavailable) --- */
-  function loadDemoData() {
-    skills = [
-      { id: 1, name: "JavaScript", category_id_fk: 1, category_name: "Programmierung", current_level: 3, target_level: 5, priority: "High", notes: "Fokus auf ES6+ und async/await", created_at: "2025-12-19T10:00:00Z" },
-      { id: 2, name: "Python", category_id_fk: 1, category_name: "Programmierung", current_level: 2, target_level: 4, priority: "Medium", notes: "Grundlagen und OOP", created_at: "2025-12-19T10:00:00Z" },
-      { id: 3, name: "Java", category_id_fk: 1, category_name: "Programmierung", current_level: 2, target_level: 4, priority: "Medium", notes: null, created_at: "2025-12-20T09:00:00Z" },
-      { id: 4, name: "HTML & CSS", category_id_fk: 2, category_name: "Webentwicklung", current_level: 4, target_level: 5, priority: "High", notes: "Responsive Design und Accessibility", created_at: "2025-12-19T10:00:00Z" },
-      { id: 5, name: "React", category_id_fk: 2, category_name: "Webentwicklung", current_level: 1, target_level: 4, priority: "Medium", notes: "Nächstes Lernziel", created_at: "2025-12-21T14:00:00Z" },
-      { id: 6, name: "MySQL", category_id_fk: 3, category_name: "Datenbanken", current_level: 2, target_level: 4, priority: "High", notes: "Joins, Subqueries, Indexing", created_at: "2025-12-19T10:00:00Z" },
-      { id: 7, name: "Linux Grundlagen", category_id_fk: 4, category_name: "DevOps", current_level: 3, target_level: 3, priority: "Low", notes: null, created_at: "2025-12-20T11:00:00Z" },
-      { id: 8, name: "Git & GitHub", category_id_fk: 4, category_name: "DevOps", current_level: 3, target_level: 4, priority: "Medium", notes: "Branching und Pull Requests", created_at: "2025-12-19T10:00:00Z" },
-    ];
-    extractCategories();
-    updateStats();
-    renderSkills();
-  }
-
   /* --- Init --- */
-  async function init() {
-    try {
-      await loadSkills();
-    } catch (_) {
-      /* If API not available, show demo data so the UI is usable */
-      loadDemoData();
-    }
-
-    /* If after loadSkills we still have no skills and error is shown, load demo */
-    if (skills.length === 0 && !errorState.hidden) {
-      loadDemoData();
-    }
-  }
-
-  init();
+  loadSkills();
 })();
