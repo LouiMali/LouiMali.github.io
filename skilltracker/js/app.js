@@ -2,7 +2,8 @@
 (() => {
   "use strict";
 
-  const API_URL = "http://localhost:3000";
+  /* API URL - change this to your backend URL */
+  const API_URL = localStorage.getItem("skilltracker_api") || "http://localhost:3000";
 
   /* --- DOM Helpers --- */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -52,8 +53,30 @@
     return res.json();
   }
 
+  async function checkAPI() {
+    /* Quick connectivity check with short timeout */
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2000);
+    try {
+      const res = await fetch(`${API_URL}/health`, { signal: ctrl.signal });
+      clearTimeout(timer);
+      return res.ok;
+    } catch (_) {
+      clearTimeout(timer);
+      return false;
+    }
+  }
+
   async function loadSkills() {
     showLoading();
+
+    /* Check if backend is reachable before making real requests */
+    const apiReady = await checkAPI();
+    if (!apiReady) {
+      activateDemoMode();
+      return;
+    }
+
     try {
       const data = await fetchJSON(`${API_URL}/skills`);
       skills = Array.isArray(data) ? data : [];
@@ -62,7 +85,7 @@
       updateStats();
       renderSkills();
     } catch (err) {
-      console.warn("SkillTracker API nicht erreichbar:", err.message);
+      console.warn("SkillTracker API Fehler:", err.message);
       activateDemoMode();
     }
   }
@@ -119,7 +142,7 @@
       banner.className = "demo-banner";
       banner.setAttribute("role", "status");
       banner.innerHTML =
-        '<span>Demo-Modus – Backend nicht verbunden</span>' +
+        '<span>Demo-Modus – Beispieldaten werden angezeigt</span>' +
         '<button class="demo-banner__close" aria-label="Schliessen">&times;</button>';
       const main = $("#app-main");
       if (main) main.prepend(banner);
