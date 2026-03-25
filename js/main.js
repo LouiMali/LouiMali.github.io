@@ -1,7 +1,7 @@
 /* Main JS – Smooth Scroll, Mobile Menu, Active-Links, GitHub Repos, Form-Validierung + mailto */
 (() => {
-  const $  = (sel, ctx=document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
   /* Footer-Jahr */
   const y = $("#year"); if (y) y.textContent = new Date().getFullYear();
@@ -23,17 +23,17 @@
   /* Mobile-Menü */
   const nav = $("#site-nav");
   const toggle = $(".nav__toggle");
-  function openMenu(){ nav.classList.add("is-open"); toggle.classList.add("is-open"); toggle.setAttribute("aria-expanded","true"); toggle.setAttribute("aria-label","Menü schliessen"); }
-  function closeMenu(){ nav.classList.remove("is-open"); toggle.classList.remove("is-open"); toggle.setAttribute("aria-expanded","false"); toggle.setAttribute("aria-label","Menü öffnen"); }
-  toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded")==="true"? closeMenu():openMenu()));
-  document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded")==="true" && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu(); });
+  function openMenu() { nav.classList.add("is-open"); toggle.classList.add("is-open"); toggle.setAttribute("aria-expanded", "true"); toggle.setAttribute("aria-label", "Menü schliessen"); }
+  function closeMenu() { nav.classList.remove("is-open"); toggle.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Menü öffnen"); }
+  toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu()));
+  document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded") === "true" && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
   /* Active-Link beim Scrollen */
   const sections = $$("#start, #ueber-mich, #projekte, #lebenslauf, #kontakt");
   const navLinks = $$(".nav__link");
   const byId = id => navLinks.find(a => a.getAttribute('href') === `#${id}`);
-  function updateActiveLink(){
+  function updateActiveLink() {
     let current = sections[0];
     const atBottom = (window.innerHeight + Math.ceil(window.scrollY)) >= document.documentElement.scrollHeight - 2;
     if (atBottom) {
@@ -58,11 +58,11 @@
   const fallback = $("#repo-fallback");
   const API = "https://api.github.com/users/LouiMali/repos?sort=updated&per_page=100";
 
-  fetch(API, { headers: { "Accept":"application/vnd.github+json" } })
+  fetch(API, { headers: { "Accept": "application/vnd.github+json" } })
     .then(async res => {
       if (!res.ok) {
         let msg = `HTTP ${res.status}`;
-        try { const data = await res.json(); if (data && data.message) msg = data.message; } catch(_){}
+        try { const data = await res.json(); if (data && data.message) msg = data.message; } catch (_) { }
         throw new Error(msg);
       }
       return res.json();
@@ -77,7 +77,7 @@
         const card = document.createElement("article");
         card.className = "card card--loaded";
         card.style.animationDelay = `${i * 0.05}s`;
-        card.setAttribute("role","listitem");
+        card.setAttribute("role", "listitem");
         card.innerHTML = `
           <h3 class="card__title"><a href="${r.html_url}" target="_blank" rel="noopener">${escapeHTML(r.name)}</a></h3>
           <p class="card__text">${escapeHTML(r.description || "Keine Beschreibung vorhanden")}</p>
@@ -90,28 +90,28 @@
       });
     })
     .catch(err => {
-      reposEl?.setAttribute("aria-busy","false");
+      reposEl?.setAttribute("aria-busy", "false");
       if (fallback) fallback.hidden = false;
       console.warn("GitHub API Fehler:", err?.message || err);
     });
 
-  function langColor(lang){
-    const map = {"JavaScript":"#f1e05a","TypeScript":"#3178c6","Python":"#3572A5","Java":"#b07219","C":"#555555","C++":"#f34b7d","Go":"#00ADD8","HTML":"#e34c26","CSS":"#563d7c","Shell":"#89e051","Rust":"#dea584","Kotlin":"#A97BFF","PHP":"#4F5D95"};
+  function langColor(lang) {
+    const map = { "JavaScript": "#f1e05a", "TypeScript": "#3178c6", "Python": "#3572A5", "Java": "#b07219", "C": "#555555", "C++": "#f34b7d", "Go": "#00ADD8", "HTML": "#e34c26", "CSS": "#563d7c", "Shell": "#89e051", "Rust": "#dea584", "Kotlin": "#A97BFF", "PHP": "#4F5D95" };
     return map[lang] || "#7aa2ff";
   }
-  function escapeHTML(str){ return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[s])); }
+  function escapeHTML(str) { return String(str).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[s])); }
 
   /* Formular-Validierung + mailto */
   const form = $("#contact-form");
   const status = $("#form-status");
 
-  function isEmail(value){
+  function isEmail(value) {
     const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i;
     return re.test(value);
   }
 
-  function recipient(){
-    const codes = [108,111,117,105,115,109,97,108,105,110,111,119,115,107,105,49,57,57,51,64,103,109,97,105,108,46,99,111,109];
+  function recipient() {
+    const codes = [108, 111, 117, 105, 115, 109, 97, 108, 105, 110, 111, 119, 115, 107, 105, 49, 57, 57, 51, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
     return String.fromCharCode(...codes);
   }
 
@@ -125,7 +125,7 @@
     const message = $("#message").value.trim();
 
     let ok = true;
-    const setErr = (id, msg) => { const el = $("#error-"+id); el.textContent = msg || ""; if (msg) ok = false; };
+    const setErr = (id, msg) => { const el = $("#error-" + id); el.textContent = msg || ""; if (msg) ok = false; };
 
     setErr("name", name.length >= 2 ? "" : "Bitte einen gueltigen Namen angeben (min. 2 Zeichen).");
     setErr("email", isEmail(email) ? "" : "Bitte eine gueltige E-Mail angeben.");
