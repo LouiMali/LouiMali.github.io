@@ -221,54 +221,6 @@
   }, { passive: true });
   updateActiveLink();
 
-  /* ── GitHub-Repos laden (Forks ausblenden) ── */
-  const reposEl = $("#repos");
-  const fallback = $("#repo-fallback");
-  const API = "https://api.github.com/users/LouiMali/repos?sort=updated&per_page=100";
-
-  fetch(API, { headers: { "Accept": "application/vnd.github+json" } })
-    .then(async res => {
-      if (!res.ok) {
-        let msg = `HTTP ${res.status}`;
-        try { const data = await res.json(); if (data && data.message) msg = data.message; } catch (_) { }
-        throw new Error(msg);
-      }
-      return res.json();
-    })
-    .then(list => {
-      const repos = list.filter(r => !r.fork);
-      if (!repos.length) throw new Error("Keine Repositories gefunden.");
-      reposEl.innerHTML = "";
-      reposEl.removeAttribute("aria-busy");
-
-      repos.forEach((r, i) => {
-        const card = document.createElement("article");
-        card.className = "card card--loaded";
-        card.style.animationDelay = `${i * 0.05}s`;
-        card.setAttribute("role", "listitem");
-        card.innerHTML = `
-          <h3 class="card__title"><a href="${r.html_url}" target="_blank" rel="noopener">${escapeHTML(r.name)}</a></h3>
-          <p class="card__text">${escapeHTML(r.description || "Keine Beschreibung vorhanden")}</p>
-          <div class="card__meta">
-            ${r.language ? `<span class="lang-badge"><span class="lang-dot" style="background:${langColor(r.language)}"></span>${escapeHTML(r.language)}</span>` : ""}
-            ${r.stargazers_count ? `<span class="star" aria-label="Sterne">★ ${r.stargazers_count}</span>` : ""}
-          </div>
-        `;
-        reposEl.appendChild(card);
-      });
-    })
-    .catch(err => {
-      reposEl?.setAttribute("aria-busy", "false");
-      if (fallback) fallback.hidden = false;
-      console.warn("GitHub API Fehler:", err?.message || err);
-    });
-
-  function langColor(lang) {
-    const map = { "JavaScript": "#f1e05a", "TypeScript": "#3178c6", "Python": "#3572A5", "Java": "#b07219", "C": "#555555", "C++": "#f34b7d", "Go": "#00ADD8", "HTML": "#e34c26", "CSS": "#563d7c", "Shell": "#89e051", "Rust": "#dea584", "Kotlin": "#A97BFF", "PHP": "#4F5D95" };
-    return map[lang] || "#7aa2ff";
-  }
-  function escapeHTML(str) { return String(str).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[s])); }
-
   /* ── Formular-Validierung + mailto ── */
   const form = $("#contact-form");
   const status = $("#form-status");
