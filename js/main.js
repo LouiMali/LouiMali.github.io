@@ -142,11 +142,10 @@
       if (val !== undefined) el.placeholder = val;
     });
 
-    // lang toggle button: highlight active option, update aria-label
-    $$('.lang-toggle__option').forEach(opt => {
-      opt.classList.toggle('is-active', opt.getAttribute('data-lang') === lang);
-    });
+    // lang toggle button: show target language label + update aria-label
     const langBtn = $('#lang-toggle');
+    const langLabel = $('#lang-toggle-label');
+    if (langLabel) langLabel.textContent = lang === 'de' ? 'EN' : 'DE';
     if (langBtn) langBtn.setAttribute('aria-label', t('lang-toggle-aria'));
   }
 

@@ -144,23 +144,23 @@ a:hover {
 .lang-toggle {
   display: inline-flex;
   align-items: center;
-  gap: .2rem;
+  gap: .35rem;
   background: transparent;
   border: 1px solid rgba(122, 162, 255, .3);
-  border-radius: 20px;
-  padding: .3rem .65rem;
+  border-radius: 10px;
+  padding: .4rem .75rem;
   cursor: pointer;
-  font-size: .8rem;
-  font-weight: 700;
-  color: var(--muted);
-  letter-spacing: .5px;
-  transition: background-color .2s ease, border-color .2s ease;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .4px;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .15s ease;
   flex-shrink: 0
 }
 
 .lang-toggle:hover {
   background: rgba(122, 162, 255, .1);
-  border-color: rgba(122, 162, 255, .5)
+  border-color: rgba(122, 162, 255, .55)
 }
 
 .lang-toggle:focus-visible {
@@ -168,17 +168,14 @@ a:hover {
   box-shadow: var(--focus)
 }
 
-.lang-toggle__option {
-  transition: color .2s ease
+.lang-toggle__icon {
+  font-size: 1rem;
+  line-height: 1
 }
 
-.lang-toggle__option.is-active {
-  color: var(--text)
-}
-
-.lang-toggle__sep {
-  opacity: .35;
-  font-weight: 400
+.lang-toggle__label {
+  font-weight: 700;
+  letter-spacing: .5px
 }
 
 .brand {
