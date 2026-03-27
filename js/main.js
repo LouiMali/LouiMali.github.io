@@ -152,10 +152,11 @@
   // Apply saved or default language on load
   applyLang(currentLang);
 
-  // Lang toggle click
-  const langToggle = $('#lang-toggle');
-  langToggle?.addEventListener('click', () => {
-    applyLang(currentLang === 'de' ? 'en' : 'de');
+  // Lang toggle click – event delegation so it works regardless of DOM timing
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#lang-toggle')) {
+      applyLang(currentLang === 'de' ? 'en' : 'de');
+    }
   });
 
   /* ── Footer-Jahr ── */
@@ -181,7 +182,7 @@
   function openMenu() { nav.classList.add("is-open"); toggle.classList.add("is-open"); toggle.setAttribute("aria-expanded", "true"); toggle.setAttribute("aria-label", "Menü schliessen"); }
   function closeMenu() { nav.classList.remove("is-open"); toggle.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Menü öffnen"); }
   toggle.addEventListener("click", () => (toggle.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu()));
-  document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded") === "true" && !nav.contains(e.target) && !toggle.contains(e.target) && !langToggle?.contains(e.target)) closeMenu(); });
+  document.addEventListener("click", (e) => { if (toggle.getAttribute("aria-expanded") === "true" && !nav.contains(e.target) && !toggle.contains(e.target) && !e.target.closest('#lang-toggle')) closeMenu(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
   /* ── Active-Link beim Scrollen ── */

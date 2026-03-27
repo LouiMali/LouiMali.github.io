@@ -40,20 +40,20 @@
         <img class="brand__logo" src="assets/favicon.svg" alt="" width="28" height="28" decoding="async">
         <span class="brand__name">Louis&nbsp;Malinowski</span>
       </a>
-      <div class="header__end">
-        <button class="lang-toggle" id="lang-toggle" aria-label="Switch to English">
+      <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
+        <ul class="nav__list">
+          <li><a href="#start" class="nav__link" data-i18n="nav-start">Start</a></li>
+          <li><a href="#ueber-mich" class="nav__link" data-i18n="nav-about">Über mich</a></li>
+          <li><a href="#projekte" class="nav__link" data-i18n="nav-skills">Kenntnisse &amp; Projekte</a></li>
+          <li><a href="#lebenslauf" class="nav__link" data-i18n="nav-cv">Lebenslauf</a></li>
+          <li><a href="#kontakt" class="nav__link" data-i18n="nav-contact">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="header__controls">
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to English">
           <span class="lang-toggle__icon" aria-hidden="true">🌐</span>
           <span class="lang-toggle__label" id="lang-toggle-label">EN</span>
         </button>
-        <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
-          <ul class="nav__list">
-            <li><a href="#start" class="nav__link" data-i18n="nav-start">Start</a></li>
-            <li><a href="#ueber-mich" class="nav__link" data-i18n="nav-about">Über mich</a></li>
-            <li><a href="#projekte" class="nav__link" data-i18n="nav-skills">Kenntnisse &amp; Projekte</a></li>
-            <li><a href="#lebenslauf" class="nav__link" data-i18n="nav-cv">Lebenslauf</a></li>
-            <li><a href="#kontakt" class="nav__link" data-i18n="nav-contact">Kontakt</a></li>
-          </ul>
-        </nav>
         <button class="nav__toggle" aria-label="Menü öffnen" aria-controls="site-nav" aria-expanded="false">
           <span class="nav__toggle-bar" aria-hidden="true"></span>
           <span class="nav__toggle-bar" aria-hidden="true"></span>

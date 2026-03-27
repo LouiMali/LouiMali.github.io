@@ -135,10 +135,11 @@ a:hover {
   padding: .75rem 0
 }
 
-.header__end {
+.header__controls {
   display: flex;
   align-items: center;
-  gap: .75rem
+  gap: .5rem;
+  flex-shrink: 0
 }
 
 .lang-toggle {
