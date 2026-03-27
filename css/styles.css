@@ -467,6 +467,88 @@ a:hover {
 }
 
 
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  margin: 1.5rem 0 2rem;
+  padding-left: 2rem
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: .45rem;
+  top: .5rem;
+  bottom: .5rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), rgba(47,111,255,.1))
+}
+
+.timeline__item {
+  position: relative;
+  padding: 0 0 2rem 1.5rem
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0
+}
+
+.timeline__marker {
+  position: absolute;
+  left: -1.55rem;
+  top: .3rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px currentColor
+}
+
+.timeline__marker--edu    { color: #7aa2ff; background: #7aa2ff }
+.timeline__marker--self   { color: #a78bfa; background: #a78bfa }
+.timeline__marker--project{ color: #34d399; background: #34d399 }
+.timeline__marker--goal   {
+  color: var(--primary);
+  background: var(--bg);
+  box-shadow: 0 0 0 2px var(--primary), 0 0 10px rgba(47,111,255,.5)
+}
+
+.timeline__date {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--muted);
+  text-transform: uppercase
+}
+
+.timeline__title {
+  font-size: 1.05rem;
+  margin: .2rem 0 .1rem;
+  color: var(--text)
+}
+
+.timeline__org {
+  font-size: .9rem;
+  color: var(--accent);
+  margin: 0 0 .35rem
+}
+
+.timeline__desc {
+  font-size: .9rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5
+}
+
+.timeline__item--goal .timeline__title {
+  color: var(--accent)
+}
+
+.timeline__desc--goal {
+  color: var(--muted);
+  font-style: italic
+}
+
 .form__row {
   display: flex;
   flex-direction: column;
