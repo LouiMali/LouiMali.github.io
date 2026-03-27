@@ -504,13 +504,24 @@ a:hover {
   box-shadow: 0 0 0 2px currentColor
 }
 
-.timeline__marker--edu    { color: #7aa2ff; background: #7aa2ff }
-.timeline__marker--self   { color: #a78bfa; background: #a78bfa }
-.timeline__marker--project{ color: #34d399; background: #34d399 }
-.timeline__marker--goal   {
+.timeline__marker--edu,
+.timeline__marker--self,
+.timeline__marker--project {
+  background: var(--primary);
   color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary), 0 0 8px rgba(47, 111, 255, .4)
+}
+
+.timeline__marker--goal {
   background: var(--bg);
-  box-shadow: 0 0 0 2px var(--primary), 0 0 10px rgba(47,111,255,.5)
+  color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary), 0 0 12px rgba(47, 111, 255, .6);
+  animation: pulse-dot 2s ease-in-out infinite
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 2px var(--primary), 0 0 8px rgba(47,111,255,.4) }
+  50%       { box-shadow: 0 0 0 2px var(--primary), 0 0 18px rgba(47,111,255,.8) }
 }
 
 .timeline__date {
