@@ -32,7 +32,7 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#start">Zum Inhalt springen</a>
+  <a class="skip-link" href="#start" data-i18n="skip-link">Zum Inhalt springen</a>
 
   <header class="site-header" role="banner">
     <div class="container header__inner">
@@ -40,40 +40,44 @@
         <img class="brand__logo" src="assets/favicon.svg" alt="" width="28" height="28" decoding="async">
         <span class="brand__name">Louis&nbsp;Malinowski</span>
       </a>
-      <button class="nav__toggle" aria-label="Menü öffnen" aria-controls="site-nav" aria-expanded="false">
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-      </button>
-      <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
-        <ul class="nav__list">
-          <li><a href="#start" class="nav__link">Start</a></li>
-          <li><a href="#ueber-mich" class="nav__link">Über mich</a></li>
-          <li><a href="#projekte" class="nav__link">Kenntnisse &amp; Projekte</a></li>
-          <li><a href="#lebenslauf" class="nav__link">Lebenslauf</a></li>
-          <li><a href="#kontakt" class="nav__link">Kontakt</a></li>
-        </ul>
-      </nav>
+      <div class="header__end">
+        <button class="lang-toggle" id="lang-toggle" aria-label="Switch to English">
+          <span class="lang-toggle__option is-active" data-lang="de">DE</span>
+          <span class="lang-toggle__sep">/</span>
+          <span class="lang-toggle__option" data-lang="en">EN</span>
+        </button>
+        <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
+          <ul class="nav__list">
+            <li><a href="#start" class="nav__link" data-i18n="nav-start">Start</a></li>
+            <li><a href="#ueber-mich" class="nav__link" data-i18n="nav-about">Über mich</a></li>
+            <li><a href="#projekte" class="nav__link" data-i18n="nav-skills">Kenntnisse &amp; Projekte</a></li>
+            <li><a href="#lebenslauf" class="nav__link" data-i18n="nav-cv">Lebenslauf</a></li>
+            <li><a href="#kontakt" class="nav__link" data-i18n="nav-contact">Kontakt</a></li>
+          </ul>
+        </nav>
+        <button class="nav__toggle" aria-label="Menü öffnen" aria-controls="site-nav" aria-expanded="false">
+          <span class="nav__toggle-bar" aria-hidden="true"></span>
+          <span class="nav__toggle-bar" aria-hidden="true"></span>
+          <span class="nav__toggle-bar" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="start" class="hero" tabindex="-1">
     <div class="container hero__inner">
       <div class="hero__text">
-        <h1 class="hero__title">Hi, ich bin Louis&nbsp;Malinowski.</h1>
-        <p class="hero__subtitle"> Ich bin ein motivierter und technikbegeisterter Mensch mit grossem Interesse an
+        <h1 class="hero__title" data-i18n="hero-title">Hi, ich bin Louis&nbsp;Malinowski.</h1>
+        <p class="hero__subtitle" data-i18n="hero-subtitle">Ich bin ein motivierter und technikbegeisterter Mensch mit grossem Interesse an
           moderner Softwareentwicklung.
           Durch meine Ausbildung an der WISS Zürich und mein selbstständiges Lernen in Programmiersprachen und
           IT-Grundlagen vertiefe ich mein Fachwissen stetig.
           Mein Ziel ist es, meine Fähigkeiten in einem praxisnahen IT-Umfeld einzusetzen und dabei zur Entwicklung
           moderner Lösungen beizutragen.
-          <br>
-
         </p>
         <div class="hero__actions">
-
           <a class="btn btn--ghost" href="https://github.com/LouiMali?tab=repositories" target="_blank"
-            rel="noopener">GitHub ansehen</a>
+            rel="noopener" data-i18n="hero-github">GitHub ansehen</a>
         </div>
       </div>
       <picture class="hero__media">
@@ -85,37 +89,37 @@
 
   <section id="ueber-mich" class="section section--surface" aria-label="Ueber mich">
     <div class="container">
-      <h2>Über mich</h2>
+      <h2 data-i18n="about-heading">Über mich</h2>
       <div class="about">
         <dl class="about__grid">
           <div>
-            <dt>Alter</dt>
+            <dt data-i18n="about-age-label">Alter</dt>
             <dd>32</dd>
           </div>
           <div>
-            <dt>Wohnort</dt>
+            <dt data-i18n="about-location-label">Wohnort</dt>
             <dd>Zürich</dd>
           </div>
           <div>
-            <dt>Schulbildung</dt>
-            <dd>Quereinsteiger in Ausbildung - Applikationsentwicklung EFZ (WISS)</dd>
+            <dt data-i18n="about-education-label">Schulbildung</dt>
+            <dd data-i18n="about-education-value">Quereinsteiger in Ausbildung - Applikationsentwicklung EFZ (WISS)</dd>
           </div>
         </dl>
         <div class="about__cols">
           <div>
-            <h3>Interessen</h3>
+            <h3 data-i18n="about-interests-heading">Interessen</h3>
             <ul class="list">
-              <li>Programmierung</li>
-              <li>Webentwicklung</li>
-              <li>Datenbanken</li>
+              <li data-i18n="about-interest-1">Programmierung</li>
+              <li data-i18n="about-interest-2">Webentwicklung</li>
+              <li data-i18n="about-interest-3">Datenbanken</li>
             </ul>
           </div>
           <div>
-            <h3>Soft Skills</h3>
+            <h3 data-i18n="about-softskills-heading">Soft Skills</h3>
             <ul class="list">
-              <li>Teamfähigkeit</li>
-              <li>Lernbereitschaft</li>
-              <li>Analytisches Denken</li>
+              <li data-i18n="about-skill-1">Teamfähigkeit</li>
+              <li data-i18n="about-skill-2">Lernbereitschaft</li>
+              <li data-i18n="about-skill-3">Analytisches Denken</li>
             </ul>
           </div>
         </div>
@@ -125,7 +129,7 @@
 
   <section id="projekte" class="section" aria-label="Kenntnisse und Projekte">
     <div class="container">
-      <h2>Kenntnisse &amp; Projekte</h2>
+      <h2 data-i18n="skills-heading">Kenntnisse &amp; Projekte</h2>
       <div class="skills">
         <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Python</span>
         <span class="badge">Java</span><span class="badge">Linux-Grundlagen</span><span class="badge">git</span><span
@@ -133,9 +137,9 @@
       </div>
 
       <p style="margin-top:1.5rem"><a class="btn btn--ghost" href="https://LouiMali.github.io/SkillTracker/"
-          target="_blank" rel="noopener">SkillTracker öffnen</a></p>
+          target="_blank" rel="noopener" data-i18n="skills-open-tracker">SkillTracker öffnen</a></p>
 
-      <p class="repo__intro">Meine öffentlichen Repositories:</p>
+      <p class="repo__intro" data-i18n="skills-repos-intro">Meine öffentlichen Repositories:</p>
       <div id="repos" class="repo-grid" role="list" aria-live="polite" aria-busy="true">
         <div class="card" aria-hidden="true">
           <div class="skeleton skeleton-title"></div>
@@ -151,8 +155,8 @@
         </div>
       </div>
       <p class="repo__fallback" id="repo-fallback" hidden>
-        Repositories konnten nicht geladen werden. Bitte später erneut versuchen.
-        Profil auf GitHub: <a href="https://github.com/LouiMali?tab=repositories" target="_blank"
+        <span data-i18n="skills-repos-fallback">Repositories konnten nicht geladen werden. Bitte später erneut versuchen.
+        Profil auf GitHub:</span> <a href="https://github.com/LouiMali?tab=repositories" target="_blank"
           rel="noopener">github.com/LouiMali</a>
       </p>
     </div>
@@ -160,43 +164,38 @@
 
   <section id="lebenslauf" class="section section--surface" aria-label="Lebenslauf">
     <div class="container">
-      <h2>Lebenslauf</h2>
-      <p>Mein aktueller Lebenslauf steht als PDF zum Download bereit.</p>
-      <a class="btn btn--primary" href="assets/cv.pdf" download>Lebenslauf als PDF herunterladen</a>
+      <h2 data-i18n="cv-heading">Lebenslauf</h2>
+      <p data-i18n="cv-text">Mein aktueller Lebenslauf steht als PDF zum Download bereit.</p>
+      <a class="btn btn--primary" href="assets/cv.pdf" download data-i18n="cv-download">Lebenslauf als PDF herunterladen</a>
     </div>
   </section>
 
   <section id="kontakt" class="section" aria-label="Kontaktformular">
     <div class="container">
-      <h2>Kontakt</h2>
-
-      <!-- Netlify Forms (optional, auskommentiert)
-      <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-        <input type="hidden" name="form-name" value="kontakt">
-      </form>
-      -->
+      <h2 data-i18n="contact-heading">Kontakt</h2>
 
       <form id="contact-form" novalidate aria-describedby="form-status">
         <div class="form__row">
-          <label for="name">Name*</label>
-          <input id="name" name="name" type="text" minlength="2" required autocomplete="name" placeholder="Ihr Name">
+          <label for="name" data-i18n="contact-label-name">Name*</label>
+          <input id="name" name="name" type="text" minlength="2" required autocomplete="name"
+            placeholder="Ihr Name" data-i18n-placeholder="contact-placeholder-name">
           <div class="input-error" id="error-name" role="alert" aria-live="polite"></div>
         </div>
         <div class="form__row">
-          <label for="email">E-Mail*</label>
+          <label for="email" data-i18n="contact-label-email">E-Mail*</label>
           <input id="email" name="email" type="email" inputmode="email" required autocomplete="email"
-            placeholder="ihre@email.ch">
+            placeholder="ihre@email.ch" data-i18n-placeholder="contact-placeholder-email">
           <div class="input-error" id="error-email" role="alert" aria-live="polite"></div>
         </div>
         <div class="form__row">
-          <label for="message">Nachricht*</label>
+          <label for="message" data-i18n="contact-label-message">Nachricht*</label>
           <textarea id="message" name="message" minlength="10" required rows="6"
-            placeholder="Ihre Nachricht an mich..."></textarea>
+            placeholder="Ihre Nachricht an mich..." data-i18n-placeholder="contact-placeholder-message"></textarea>
           <div class="input-error" id="error-message" role="alert" aria-live="polite"></div>
         </div>
-        <div class="form__actions"><button class="btn btn--primary" type="submit">Nachricht senden</button></div>
+        <div class="form__actions"><button class="btn btn--primary" type="submit" data-i18n="contact-submit">Nachricht senden</button></div>
         <p id="form-status" class="form__status" aria-live="polite"></p>
-        <p class="privacy-hint"><strong>Datenschutzhinweis:</strong> Das Formular erzeugt eine
+        <p class="privacy-hint" data-i18n-html="contact-privacy-html"><strong>Datenschutzhinweis:</strong> Das Formular erzeugt eine
           <code>mailto:</code>-Nachricht in Ihrem E-Mail-Programm.
           Ihre Angaben werden nicht auf dem Server gespeichert und nur zur Bearbeitung Ihrer Anfrage verwendet.
         </p>
@@ -206,8 +205,8 @@
 
   <section id="datenschutz" class="section section--compact" aria-label="Datenschutzerklärung">
     <div class="container">
-      <h2>Datenschutzerklärung (Kurzfassung)</h2>
-      <p>Diese Website setzt keine Cookies, keine Tracker und keine externen Skripte ausser Google Fonts ein.
+      <h2 data-i18n="privacy-heading">Datenschutzerklärung (Kurzfassung)</h2>
+      <p data-i18n="privacy-text">Diese Website setzt keine Cookies, keine Tracker und keine externen Skripte ausser Google Fonts ein.
         Personenbezogene Daten werden nur verarbeitet, wenn Sie eine E-Mail an mich senden. Rechtsgrundlage:
         berechtigtes Interesse (Kontaktaufnahme).</p>
     </div>
@@ -216,7 +215,7 @@
   <footer class="site-footer" role="contentinfo">
     <div class="container footer__inner">
       <p>&copy; <span id="year"></span> Louis Malinowski. Kurz-Impressum &amp; Datenschutz:
-        <a href="#datenschutz">Zur Datenschutzerklärung</a>.
+        <a href="#datenschutz" data-i18n="footer-privacy-link">Zur Datenschutzerklärung</a>.
       </p>
     </div>
   </footer>
